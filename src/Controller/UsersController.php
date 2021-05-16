@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
 /**
  * Users Controller
  *
@@ -11,6 +12,16 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {
+    /**
+     * beforefilter
+     * @param EventInterface $event
+     */
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['login']);
+    }
+
     /**
      * Index method
      *
@@ -101,5 +112,9 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function login()
+    {
     }
 }
