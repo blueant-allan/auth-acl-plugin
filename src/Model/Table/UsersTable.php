@@ -29,6 +29,8 @@ use Cake\Validation\Validator;
  */
 class UsersTable extends Table
 {
+    private $roles;
+
     /**
      * Initialize method
      *
@@ -44,6 +46,13 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->roles = [
+            'admin',
+            'author',
+            'managers',
+            'users'
+        ];
     }
 
     /**
@@ -73,7 +82,8 @@ class UsersTable extends Table
             ->scalar('role')
             ->maxLength('role', 20)
             ->requirePresence('role', 'create')
-            ->notEmptyString('role');
+            ->notEmptyString('role')
+            ->inList('role', $this->roles);
 
         return $validator;
     }
