@@ -77,7 +77,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $this->addPlugin('Authentication');
 
         // Adding Acl plugin
-        $this->addPlugin('Acl');
+//        $this->addPlugin('Acl', [
+//            'className' => 'Acl.Acl'
+//        ]);
     }
 
     /**

@@ -52,7 +52,7 @@ class GroupsTable extends Table
         ]);
 
         // Add Acl behavior
-        $this->addBehavior('Acl.Acl', ['type' => 'requester']);
+//        $this->addBehavior('Acl.Acl', ['type' => 'requester']);
     }
 
     /**

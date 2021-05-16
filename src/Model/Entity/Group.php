@@ -37,8 +37,8 @@ class Group extends Entity
      * parent node
      * @return null
      */
-    public function parentNode()
-    {
-        return null;
-    }
+//    public function parentNode()
+//    {
+//        return null;
+//    }
 }

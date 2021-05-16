@@ -56,27 +56,27 @@ class User extends Entity
      * parent node method
      * @return array
      */
-    public function parentNode()
-    {
-        if (!$this->id) {
-            return null;
-        }
-
-        if (isset($this->group_id)) {
-            $groupId = $this->group_id;
-        } else {
-            $Users = TableRegistry::getTableLocator()->get('Users');
-            $user = $users->find()
-                ->select(['group_id'])
-                ->where(['id' => $this->id])
-                ->first();
-            $groupId = $user->group_id;
-        }
-
-        if (!$groupId) {
-            return null;
-        }
-
-        return ['Groups' => ['id' => $groupId]];
-    }
+//    public function parentNode()
+//    {
+//        if (!$this->id) {
+//            return null;
+//        }
+//
+//        if (isset($this->group_id)) {
+//            $groupId = $this->group_id;
+//        } else {
+//            $Users = TableRegistry::getTableLocator()->get('Users');
+//            $user = $users->find()
+//                ->select(['group_id'])
+//                ->where(['id' => $this->id])
+//                ->first();
+//            $groupId = $user->group_id;
+//        }
+//
+//        if (!$groupId) {
+//            return null;
+//        }
+//
+//        return ['Groups' => ['id' => $groupId]];
+//    }
 }
