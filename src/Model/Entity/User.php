@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\ORM\TableRegistry;
 
 /**
  * User Entity
@@ -43,11 +44,35 @@ class User extends Entity
     protected $_hidden = [
         'password',
     ];
-    
+
     protected function _setPassword($password)
     {
         if (strlen($password) > 0) {
             return (new DefaultPasswordHasher)->hash($password);
         }
+    }
+
+    public function parentNode()
+    {
+        if (!$this->id) {
+            return null;
+        }
+
+        if (isset($this->group_id)) {
+            $groupId = $this->group_id;
+        } else {
+            $Users = TableRegistry::getTableLocator()->get('Users');
+            $user = $users->find()
+                ->select(['group_id'])
+                ->where(['id' => $this->id])
+                ->first();
+            $groupId = $user->group_id;
+        }
+
+        if (!$groupId) {
+            return null;
+        }
+
+        return ['Groups' => ['id' => $groupId]];
     }
 }

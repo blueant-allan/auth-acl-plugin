@@ -7,6 +7,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\EventInterface;
+use Cake\Datasource\EntityInterface;
+use \ArrayObject;
 
 /**
  * Users Model
@@ -53,6 +56,9 @@ class UsersTable extends Table
             'manager',
             'user'
         ];
+
+        // Add Acl behavior
+        $this->addBehavior('Acl.Acl', ['type' => 'requester']);
     }
 
     /**
@@ -110,4 +116,8 @@ class UsersTable extends Table
     {
         return array_combine($this->roles, $this->roles);
     }
+
+//    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+//    {
+//    }
 }
