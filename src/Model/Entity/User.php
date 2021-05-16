@@ -52,6 +52,10 @@ class User extends Entity
         }
     }
 
+    /**
+     * parent node method
+     * @return array
+     */
     public function parentNode()
     {
         if (!$this->id) {

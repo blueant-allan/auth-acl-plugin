@@ -33,7 +33,10 @@ class Group extends Entity
         'users' => true,
     ];
 
-    
+    /**
+     * parent node
+     * @return null
+     */
     public function parentNode()
     {
         return null;
