@@ -50,8 +50,8 @@ class UsersTable extends Table
         $this->roles = [
             'admin',
             'author',
-            'managers',
-            'users'
+            'manager',
+            'user'
         ];
     }
 
@@ -100,5 +100,14 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
 
         return $rules;
+    }
+
+    /**
+     * Return roles
+     * @return array
+     */
+    public function getRoles()
+    {
+        return array_combine($this->roles, $this->roles);
     }
 }

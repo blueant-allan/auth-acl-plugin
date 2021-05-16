@@ -19,7 +19,7 @@ class UsersController extends AppController
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['login']);
+        $this->Authentication->addUnauthenticatedActions(['login', 'mitest']);
     }
 
     /**
@@ -67,7 +67,9 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $this->set(compact('user'));
+
+        $roles = $this->Users->getRoles();
+        $this->set(compact('user', 'roles'));
     }
 
     /**
@@ -116,5 +118,31 @@ class UsersController extends AppController
 
     public function login()
     {
+        $this->request->allowMethod(['get', 'post']);
+
+        $result = $this->Authentication->getResult();
+        // regardless of POST or GET, redirect if user is logged in
+        if ($result->isValid()) {
+            // redirect to /articles after login success
+            $redirect = $this->request->getQuery('redirect', [
+                'controller' => 'Users',
+                'action' => 'index',
+            ]);
+
+            return $this->redirect($redirect);
+        }
+
+        // display error if user submitted and authentication failed
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error(__('Invalid email or password'));
+        }
+    }
+
+    public function mitest()
+    {
+        $this->autoRender = false;
+        dump((new \Cake\Auth\DefaultPasswordHasher)->hash('test'));
+        // test - $2y$10$CFyG5x0oobTIA9T8pOn9e.5dBVXT6DcRbzFohCLRtFLDSfR92YRCG
+        exit('-end-mitest-');
     }
 }
