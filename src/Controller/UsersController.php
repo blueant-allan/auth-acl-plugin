@@ -138,11 +138,31 @@ class UsersController extends AppController
         }
     }
 
+    
+    /**
+     * mitest action
+     */
     public function mitest()
     {
         $this->autoRender = false;
         dump((new \Cake\Auth\DefaultPasswordHasher)->hash('test'));
         // test - $2y$10$CFyG5x0oobTIA9T8pOn9e.5dBVXT6DcRbzFohCLRtFLDSfR92YRCG
         exit('-end-mitest-');
+    }
+
+
+    /**
+     * User logout
+     *
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     */
+    public function logout()
+    {
+        $result = $this->Authentication->getResult();
+        // regardless of POST or GET, redirect if user is logged in
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
     }
 }
