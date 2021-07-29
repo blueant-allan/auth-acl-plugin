@@ -52,5 +52,17 @@ class AppController extends Controller
 
         // Add this line to check authentication result and lock your site
         $this->loadComponent('Authentication.Authentication');
+
+        // load the Authorization (ACL)
+        /**
+         * $this->loadComponent('Authorization.Authorization');
+         * looks like the skipAuthorization only checks at UsersController class
+         */
+        $this->loadComponent('Authorization.Authorization', [
+            'skipAuthorization' => [
+                'login',
+                'logout'
+            ]
+        ]);
     }
 }
