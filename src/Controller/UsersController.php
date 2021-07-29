@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use App\Model\Entity\User;
+
+
 /**
  * Users Controller
  *
@@ -29,8 +32,8 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $this->Authorization->authorize($this->Users);
         $users = $this->paginate($this->Users);
-
         $this->set(compact('users'));
     }
 
@@ -107,6 +110,10 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+
+
+
+
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
@@ -118,6 +125,7 @@ class UsersController extends AppController
 
     public function login()
     {
+//        $this->Authorization->skipAuthorization();
         $this->request->allowMethod(['get', 'post']);
 
         $result = $this->Authentication->getResult();
@@ -138,7 +146,7 @@ class UsersController extends AppController
         }
     }
 
-    
+
     /**
      * mitest action
      */
@@ -163,6 +171,23 @@ class UsersController extends AppController
         if ($result->isValid()) {
             $this->Authentication->logout();
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
+    }
+
+
+    /**
+     * welcome test page
+     */
+    public function welcome()
+    {
+        $user = new User();
+//        $user->flag = true;
+
+        $identity = $this->request->getAttribute('identity');
+        if ($identity->can('welcome', $user)) {
+            $this->set('allowed', true);
+        } else {
+            $this->set('allowed', false);
         }
     }
 }
