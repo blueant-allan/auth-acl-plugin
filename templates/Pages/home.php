@@ -47,7 +47,7 @@ if (!Configure::read('debug')) :
     );
 endif;
 
-$cakeDescription = 'CakePHP: the rapid development PHP framework';
+$cakeDescription = 'Auth and ACL workspace';
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,7 +75,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 <img alt="CakePHP" src="https://cakephp.org/v2/img/logos/CakePHP_Logo.svg" width="350" />
             </a>
             <h1>
-                Welcome to CakePHP <?= Configure::version() ?> Strawberry (🍓)
+                public facing section
             </h1>
         </div>
     </header>
@@ -194,6 +194,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                         <h3>Getting Started</h3>
                         <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/en/">CakePHP Documentation</a>
                         <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/en/tutorials-and-examples/cms/installation.html">The 20 min CMS Tutorial</a>
+                        <a href="/login">Login</a>
                     </div>
                 </div>
                 <hr>
