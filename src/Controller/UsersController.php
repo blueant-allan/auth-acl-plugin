@@ -125,7 +125,6 @@ class UsersController extends AppController
 
     public function login()
     {
-//        $this->Authorization->skipAuthorization();
         $this->request->allowMethod(['get', 'post']);
 
         $result = $this->Authentication->getResult();
@@ -133,7 +132,7 @@ class UsersController extends AppController
         if ($result->isValid()) {
             // redirect to /articles after login success
             $redirect = $this->request->getQuery('redirect', [
-                'controller' => 'Users',
+                'controller' => 'Dashboard',
                 'action' => 'index',
             ]);
 
