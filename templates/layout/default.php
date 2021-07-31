@@ -47,8 +47,13 @@ $cakeDescription = 'Auth and ACL workspace';
     </nav>
     <main class="main">
         <div class="container">
-            <?= $this->Flash->render() ?>
-            <?= $this->fetch('content') ?>
+            <?php
+                echo $this->Flash->render();
+                if ($showNav) {
+                    echo $this->element('navbars');
+                }
+                echo $this->fetch('content')
+            ?>
         </div>
     </main>
     <footer>
