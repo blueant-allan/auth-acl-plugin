@@ -64,5 +64,11 @@ class AppController extends Controller
                 'logout'
             ]
         ]);
+
+        /**
+         * set showNav
+         */
+        $showNav = (empty($this->request->getAttribute('identity'))) ? false : true;
+        $this->set('showNav', $showNav);
     }
 }
